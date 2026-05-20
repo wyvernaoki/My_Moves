@@ -76,14 +76,35 @@
 
         /* Songs List */
         .song-card { border-left: 10px solid var(--main-yellow); }
-        .song-list { list-style: none; padding: 0; }
+        .song-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 18px; }
         .song-item { 
-            padding: 10px 0; 
-            border-bottom: 1px solid #eee; 
-            display: flex; 
-            justify-content: space-between;
+            padding: 15px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a, #fbbf24);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            color: white;
+            transition: 0.4s ease;
+            box-shadow: 0 0 18px rgba(251, 191, 36, 0.35);
         }
-        .song-num { color: var(--main-blue); font-weight: bold; margin-right: 10px; }
+        .song-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+        }
+        .song-num { color: #fcd34d; font-weight: bold; font-size: 1.2em; }
+        .song-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .song-item iframe {
+            width: 100%;
+            height: 80px;
+            border: none;
+            border-radius: 10px;
+        }
 
         /* Closing Section */
         .closing {
@@ -96,6 +117,16 @@
             font-size: 3rem;
             color: var(--main-blue);
             margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .song-item {
+                flex-direction: column;
+            }
+            .song-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
 
     </style>
@@ -120,7 +151,7 @@ Ay tila himig ng awit na hinihili.
 Ang kanyang mukha ay parang guhit maestro.
  Na hindi mo maikukumpara kahit kanino.
 
- Ang kanyang ngiti’y parang umaga, 
+ Ang kanyang ngiti'y parang umaga, 
 Bumibigkas ng awit, puno ng hiwaga. 
 Isang sandali sa kanyang piling, 
 Ay langit na walang hanggang ningning.
@@ -185,7 +216,7 @@ Ika ing pangarap ning biye ku.
             <div class="date-text">Letter #2 - November 13, 2024 6:04:36 PM PHT</div>
             <div class="card-title">My Second letter I sent in Sendthesong</div>
             <div class="signature-text">
-             idk kung nakilala mo na 'ko sa arrowmance na una kong sinubmit here but I just want to say na pagaling ka if ever man na may results na yung check-up mo basta always take yourself. Always remember na you're so beautiful at sana makalipad ka! Fly high future Eagle Scout!💐🫡💘   
+             idk kung nakilala mo na 'ko sa arrowmance na una kong sinubmit here but I just want to say na pagaling ka if ever man na may results na yung check-up mo basta always take yourself. A[...]
           </div>
         </div>
 
@@ -193,7 +224,7 @@ Ika ing pangarap ning biye ku.
             <div class="date-text">Letter #3 - December 31, 2024 10:05:25 PM PHT</div>
             <div class="card-title">My New Year Greet letter I sent in Sendthesong</div>
             <div class="signature-text">
-             Hi, Happy New year, Ganda, I hope you are doing well this year and I'm praying for your health specially to your hair na alam kong naglalagas. Hope you enjoy the 2025. Fly high future eagle scout! 🦅🫡💘
+             Hi, Happy New year, Ganda, I hope you are doing well this year and I'm praying for your health specially to your hair na alam kong naglalagas. Hope you enjoy the 2025. Fly high futur[...]
    
           </div>
         </div>
@@ -201,7 +232,7 @@ Ika ing pangarap ning biye ku.
             <div class="date-text">Letter #4 - January 18, 2025 10:02:17 PM PHT</div>
             <div class="card-title">My First letter I sent in Sendthesong 2025</div>
             <div class="signature-text">
-            Hi, Future Eagle Scout! I hope you heal from your current situation and I'll pray na mag Eagle ka. I know you know who I am(sana kase puro rob deniel notes ko) I'm not just liking you but it's I LIKE YOU. I hope you doing well talaga lalo na acads magmomoving up ka dapat may honors ah(wow mala parents) if you feel uncomfty with it just tell me eheh. Again, Good luck sayo Nhamy! Future Eagle scout! 🦅😊💘💐    
+            Hi, Future Eagle Scout! I hope you heal from your current situation and I'll pray na mag Eagle ka. I know you know who I am(sana kase puro rob deniel notes ko) I'm not just liking you[...]
           </div>
         </div>
 
@@ -209,7 +240,7 @@ Ika ing pangarap ning biye ku.
             <div class="date-text">Letter #5 -  January 19, 2025 8:53:54 PM PHT</div>
             <div class="card-title">My Second letter I sent in Sendthesong 2025</div>
             <div class="signature-text">
-              Hi, how are you? I hope you are doing well rn. If you have a problem and gusto mong magopen you can chat me anytime. I know you know who I am. I'm always here for you. I hope mag eagle ka! Padayon, future Eagle Scout & FA(diko sure ahh)! 🦅💐😊✈️  
+              Hi, how are you? I hope you are doing well rn. If you have a problem and gusto mong magopen you can chat me anytime. I know you know who I am. I'm always here for you. I hope mag ea[...]
           </div>
         </div>
 
@@ -217,7 +248,7 @@ Ika ing pangarap ning biye ku.
             <div class="date-text">Letter #6 -  January 25, 2025 10:25:25 PM PHT</div>
             <div class="card-title">My Third letter I sent in Sendthesong 2025 </div>
             <div class="signature-text">
-           Hi, Malagu, I know you're struggling rn I just wanted to say na huwag ka masyadong pastress and always remember na I'm always here for you. Just keep going pabayaan mo lang yung monggol(basher) and since kilala mo na rin ako I'll just keep doing this kahit anong mangyari.(nahiya tuloy ako) have a nice night Future Eagle and FA!✈️🦅💐     
+           Hi, Malagu, I know you're struggling rn I just wanted to say na huwag ka masyadong pastress and always remember na I'm always here for you. Just keep going pabayaan mo lang yung monggo[...]
           </div>
         </div>
 
@@ -249,44 +280,48 @@ Ika ing pangarap ning biye ku.
             <div class="date-text">Letter #10 - January 28, 2025 11:22:26 PM PHT</div>
             <div class="card-title">My sixth letter I sent in Sendthesong</div>
             <div class="signature-text">
-                if you have problems we can talk about it. You're the only one na nakikita ko na mala guhit maestro ang angking ganda at maka mala anghel na mga mata. Padayon Future Eagle Scout & FA! ✈️🦅💐
+                if you have problems we can talk about it. You're the only one na nakikita ko na mala guhit maestro ang angking ganda at maka mala anghel na mga mata. Padayon Future Eagle Scout &[...]
           </div>
-     
-        </div> <div class="card">
-            <div class="date-text">Letter #9 -   PHT</div>
-            <div class="card-title">My Second letter I sent in Sendthesong</div>
-            <div class="signature-text">
-                
-          </div>
-        </div> <div class="card">
-            <div class="date-text">Letter #9 -   PHT</div>
-            <div class="card-title">My Second letter I sent in Sendthesong</div>
-            <div class="signature-text">
-                
-          </div>
-            
-        </div> <div class="card">
-            <div class="date-text">Letter #9 -   PHT</div>
-            <div class="card-title">My Second letter I sent in Sendthesong</div>
-            <div class="signature-text">
-                
-          </div>
-        </div> <div class="card">
-            <div class="date-text">Letter #9 -   PHT</div>
-            <div class="card-title">My Second letter I sent in Sendthesong</div>
-            <div class="signature-text">
-                
-          </div>
-        </div>
-        
-       <div class="card song-card">
-            <h2 style="color: var(--main-blue)">🎵 Top Songs For You</h2>
+      
+         </div>
+
+        <div class="card song-card">
+            <h2 style="color: var(--main-blue); text-align: center; margin-bottom: 30px;">🎵 Top Songs For You</h2>
             <div class="song-list">
-                <div class="song-item"><span><span class="song-num">#1</span> Arrowmance</span> <span>Rob Deniel</span></div>
-                <div class="song-item"><span><span class="song-num">#2</span> Paninindigan Kita</span> <span>Ben&Ben</span></div>
-                <div class="song-item"><span><span class="song-num">#3</span> Dalangin</span> <span>Earl Agustin</span></div>
-                <div class="song-item"><span><span class="song-num">#4</span> Ang Pag-ibig</span> <span>Rob Deniel</span></div>
-                <div class="song-item"><span><span class="song-num">#5</span> I Like Me Better</span> <span>Lauv</span></div>
+                <div class="song-item">
+                    <div class="song-info">
+                        <span><span class="song-num">#1</span> Arrowmance - Rob Deniel</span>
+                    </div>
+                    <iframe src="https://open.spotify.com/embed/track/7hh6oTg0HAnNa4u1MQUxhq?utm_source=generator"></iframe>
+                </div>
+
+                <div class="song-item">
+                    <div class="song-info">
+                        <span><span class="song-num">#2</span> Paninindigan Kita - Ben&Ben</span>
+                    </div>
+                    <iframe src="https://open.spotify.com/embed/track/5d9Rka4T0szdC1MobhtXrV?utm_source=generator"></iframe>
+                </div>
+
+                <div class="song-item">
+                    <div class="song-info">
+                        <span><span class="song-num">#3</span> Dalangin - Earl Agustin</span>
+                    </div>
+                    <iframe src="https://open.spotify.com/embed/track/2cIxxsxXNvOXNFVfDJpF3x?utm_source=generator"></iframe>
+                </div>
+
+                <div class="song-item">
+                    <div class="song-info">
+                        <span><span class="song-num">#4</span> Ang Pag-ibig - Rob Deniel</span>
+                    </div>
+                    <iframe src="https://open.spotify.com/embed/track/639Wg7NFfgbwjSwDphqgvz?utm_source=generator"></iframe>
+                </div>
+
+                <div class="song-item">
+                    <div class="song-info">
+                        <span><span class="song-num">#5</span> I Like Me Better - Lauv</span>
+                    </div>
+                    <iframe src="https://open.spotify.com/embed/track/1jXfVzMk8cSbvAXMML4Y4f?utm_source=generator"></iframe>
+                </div>
             </div>
         </div>
 
@@ -301,4 +336,3 @@ Ika ing pangarap ning biye ku.
  
 </body>
 </html>
-
