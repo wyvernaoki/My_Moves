@@ -87,6 +87,7 @@
             color: white;
             transition: 0.4s ease;
             box-shadow: 0 0 18px rgba(251, 191, 36, 0.35);
+            animation: glowPulse 3s infinite alternate;
         }
         .song-item:hover {
             transform: translateY(-8px) scale(1.02);
@@ -104,6 +105,15 @@
             height: 80px;
             border: none;
             border-radius: 10px;
+        }
+
+        @keyframes glowPulse {
+            from {
+                box-shadow: 0 0 12px rgba(251, 191, 36, 0.25);
+            }
+            to {
+                box-shadow: 0 0 28px rgba(59, 130, 246, 0.55);
+            }
         }
 
         /* Closing Section */
@@ -286,7 +296,8 @@ Ika ing pangarap ning biye ku.
          </div>
 
         <div class="card song-card">
-            <h2 style="color: var(--main-blue); text-align: center; margin-bottom: 30px;">🎵 Top Songs For You</h2>
+            <h2 style="color: var(--main-blue); text-align: center; margin-bottom: 30px;">🎵 Top 10 Songs I Dedicated For You 💙</h2>
+            <p style="text-align: center; color: #64748b; margin-bottom: 35px; font-style: italic;">Every song reminds me of you ✨</p>
             <div class="song-list">
                 <div class="song-item">
                     <div class="song-info">
@@ -318,9 +329,44 @@ Ika ing pangarap ning biye ku.
 
                 <div class="song-item">
                     <div class="song-info">
-                        <span><span class="song-num">#5</span> I Like Me Better - Lauv</span>
+                        <span><span class="song-num">#5</span> Distansya - Rob Deniel & Janine</span>
+                    </div>
+                    <iframe src="https://open.spotify.com/embed/track/5ckv9XlKXJN6JccRJFjfyv?utm_source=generator"></iframe>
+                </div>
+
+                <div class="song-item">
+                    <div class="song-info">
+                        <span><span class="song-num">#6</span> Puso - Rob Deniel</span>
+                    </div>
+                    <iframe src="https://open.spotify.com/embed/track/23GZMUl9aJvSmb2QpBS55j?utm_source=generator"></iframe>
+                </div>
+
+                <div class="song-item">
+                    <div class="song-info">
+                        <span><span class="song-num">#7</span> Buwan - Juan Karlos</span>
+                    </div>
+                    <iframe src="https://open.spotify.com/embed/track/5f9808hpiCpuNyqqdXmpF2?utm_source=generator"></iframe>
+                </div>
+
+                <div class="song-item">
+                    <div class="song-info">
+                        <span><span class="song-num">#8</span> Ulap - Rob Deniel</span>
+                    </div>
+                    <iframe src="https://open.spotify.com/embed/track/0yBycfuTYOoDrvfP5wY2Ux?utm_source=generator"></iframe>
+                </div>
+
+                <div class="song-item">
+                    <div class="song-info">
+                        <span><span class="song-num">#9</span> I Like Me Better - Lauv</span>
                     </div>
                     <iframe src="https://open.spotify.com/embed/track/1jXfVzMk8cSbvAXMML4Y4f?utm_source=generator"></iframe>
+                </div>
+
+                <div class="song-item">
+                    <div class="song-info">
+                        <span><span class="song-num">#10</span> ILYSB - LANY</span>
+                    </div>
+                    <iframe src="https://open.spotify.com/embed/track/2btKtacOXuMtC9WjcNRvAA?utm_source=generator"></iframe>
                 </div>
             </div>
         </div>
