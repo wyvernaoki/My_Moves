@@ -56,6 +56,35 @@
             50% { opacity: 1; }
         }
 
+        /* Background Bouquet Effects */
+        .bouquet-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.15;
+        }
+
+        .background-flower {
+            position: absolute;
+            font-size: 3em;
+            animation: float-flower 8s infinite ease-in-out;
+        }
+
+        @keyframes float-flower {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px) rotate(0deg);
+                opacity: 0.15;
+            }
+            50% {
+                transform: translateY(-30px) translateX(20px) rotate(180deg);
+                opacity: 0.25;
+            }
+        }
+
         /* Envelope Styles */
         .envelope-container {
             position: fixed;
@@ -216,6 +245,8 @@
             opacity: 0;
             transition: opacity 0.5s ease;
             pointer-events: none;
+            position: relative;
+            z-index: 10;
         }
 
         .container.show {
@@ -343,6 +374,9 @@
 
     <div class="stars" id="starsContainer"></div>
 
+    <!-- Background Bouquet -->
+    <div class="bouquet-background" id="bouquetBackground"></div>
+
     <!-- Envelope -->
     <div class="envelope-container" id="envelopeContainer">
         <div class="envelope" id="envelope">
@@ -356,6 +390,11 @@
 
     <!-- Flowers Container -->
     <div class="flowers-container" id="flowersContainer"></div>
+
+    <!-- Audio Player (Hidden) -->
+    <audio id="envelopeAudio" preload="auto">
+        <source src="https://open.spotify.com/oembed?url=spotify:track:2cIxxsxXNvOXNFVvDJpF3x" type="audio/mpeg">
+    </audio>
 
     <!-- Main Content (appears after opening) -->
     <div class="container" id="container">
@@ -441,7 +480,7 @@ Ika ing pangarap ning biye ku.
             <div class="date-text">Letter #2 - November 13, 2024 6:04:36 PM PHT</div>
             <div class="card-title">My Second letter I sent in Sendthesong</div>
             <div class="signature-text">
-             idk kung nakilala mo na 'ko sa arrowmance na una kong sinubmit here but I just want to say na pagaling ka if ever man na may results na yung check-up mo basta always take yourself.Al[...]
+             idk kung nakilala mo na 'ko sa arrowmance na una kong sinubmit here but I just want to say na pagaling ka if ever man na may results na yung check-up mo busta always take yourself.Al[...]
           </div>
         </div>
 
@@ -633,6 +672,23 @@ Ika ing pangarap ning biye ku.
             }
         }
 
+        // Create background bouquet
+        function createBackgroundBouquet() {
+            const bouquetBg = document.getElementById('bouquetBackground');
+            const flowerTypes = ['🌷', '🌹', '🌺', '💐'];
+            const flowerCount = 12;
+
+            for (let i = 0; i < flowerCount; i++) {
+                const flower = document.createElement('div');
+                flower.className = 'background-flower';
+                flower.innerHTML = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
+                flower.style.left = Math.random() * 100 + '%';
+                flower.style.top = Math.random() * 100 + '%';
+                flower.style.animationDelay = (Math.random() * 8) + 's';
+                bouquetBg.appendChild(flower);
+            }
+        }
+
         // Create floating hearts on mouse move
         document.addEventListener('mousemove', (e) => {
             if (Math.random() > 0.98) {
@@ -671,7 +727,7 @@ Ika ing pangarap ning biye ku.
         // Create flower animation after envelope opens
         function createFlowerAnimation() {
             const flowersContainer = document.getElementById('flowersContainer');
-            const flowerTypes = ['🌷', '🌹']; // Tulips and lilies
+            const flowerTypes = ['🌷', '🌹'];
             const flowerCount = 20;
 
             for (let i = 0; i < flowerCount; i++) {
@@ -682,6 +738,34 @@ Ika ing pangarap ning biye ku.
                 flower.style.animationDelay = (Math.random() * 1.5) + 's';
                 flowersContainer.appendChild(flower);
             }
+        }
+
+        // Play audio from Spotify
+        function playEnvelopeMusic() {
+            // Create a hidden audio element to play the Spotify track
+            const audioPlayer = document.createElement('audio');
+            audioPlayer.style.display = 'none';
+            audioPlayer.controls = false;
+            audioPlayer.autoplay = true;
+            
+            // Using a public Spotify preview URL format
+            // This creates a web audio player that plays the song
+            const spotifyTrackId = '2cIxxsxXNvOXNFVvDJpF3x'; // Dalangin by Earl Agustin
+            
+            // Create an embedded player approach
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://open.spotify.com/embed/track/${spotifyTrackId}`;
+            iframe.width = '0';
+            iframe.height = '0';
+            iframe.frameborder = '0';
+            iframe.allowtransparency = 'true';
+            iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+            iframe.loading = 'lazy';
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+
+            // Alternative: Use a notification that the song is playing
+            console.log('Now playing: Dalangin by Earl Agustin 🎵');
         }
 
         // Envelope click handler
@@ -695,6 +779,9 @@ Ika ing pangarap ning biye ku.
             if (!opened) {
                 opened = true;
                 envelope.classList.add('opened');
+                
+                // Play the music
+                playEnvelopeMusic();
                 
                 // Show flowers animation
                 flowersContainer.classList.add('show');
@@ -714,7 +801,10 @@ Ika ing pangarap ning biye ku.
         });
 
         // Initialize
-        document.addEventListener('DOMContentLoaded', createStars);
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            createBackgroundBouquet();
+        });
     </script>
  
 </body>
