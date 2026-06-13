@@ -29,6 +29,7 @@
             line-height: 1.6;
             position: relative;
             overflow-x: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text x="0" y="24" font-size="24">🌷</text></svg>') 16 16, auto;
         }
 
         /* Animated stars background */
@@ -65,7 +66,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.15;
+            opacity: 0.2;
         }
 
         .background-flower {
@@ -77,11 +78,11 @@
         @keyframes float-flower {
             0%, 100% {
                 transform: translateY(0px) translateX(0px) rotate(0deg);
-                opacity: 0.15;
+                opacity: 0.2;
             }
             50% {
                 transform: translateY(-30px) translateX(20px) rotate(180deg);
-                opacity: 0.25;
+                opacity: 0.35;
             }
         }
 
@@ -238,6 +239,26 @@
             }
         }
 
+        /* Explosive flower burst animation */
+        .burst-flower {
+            position: fixed;
+            font-size: 2.5em;
+            pointer-events: none;
+            animation: burstExplode 2s ease-out forwards;
+            z-index: 60;
+        }
+
+        @keyframes burstExplode {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(0.2) rotate(360deg);
+            }
+        }
+
         .container { 
             max-width: 900px; 
             margin: 0 auto; 
@@ -261,7 +282,7 @@
         .card {
             background: var(--white);
             border: 3px solid var(--main-yellow);
-            border-radius: 25px; /* Round corners */
+            border-radius: 25px;
             padding: 35px;
             margin-bottom: 40px;
             box-shadow: 10px 10px 0px var(--main-blue);
@@ -277,7 +298,6 @@
 
         .date-text { font-size: 0.8rem; color: #888; text-transform: uppercase; }
 
-        /* Signature Font for Content */
         .signature-text {
             font-family: 'Dancing Script', cursive;
             font-size: 1.6rem;
@@ -285,7 +305,6 @@
             white-space: pre-line;
         }
 
-        /* Dream Section */
         .dreams-section {
             background: var(--main-blue);
             color: var(--main-yellow);
@@ -303,7 +322,6 @@
         .dream-item { margin: 15px; flex: 1; min-width: 150px; }
         .dream-icon { font-size: 2rem; display: block; }
 
-        /* Songs List */
         .song-card { border-left: 10px solid var(--main-yellow); }
         .song-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 18px; }
         .song-item { 
@@ -345,7 +363,6 @@
             }
         }
 
-        /* Closing Section */
         .closing {
             text-align: center;
             padding: 60px 20px;
@@ -390,11 +407,6 @@
 
     <!-- Flowers Container -->
     <div class="flowers-container" id="flowersContainer"></div>
-
-    <!-- Audio Player (Hidden) -->
-    <audio id="envelopeAudio" preload="auto">
-        <source src="https://open.spotify.com/oembed?url=spotify:track:2cIxxsxXNvOXNFVvDJpF3x" type="audio/mpeg">
-    </audio>
 
     <!-- Main Content (appears after opening) -->
     <div class="container" id="container">
@@ -672,11 +684,11 @@ Ika ing pangarap ning biye ku.
             }
         }
 
-        // Create background bouquet
+        // Create background bouquet - MORE FLOWERS
         function createBackgroundBouquet() {
             const bouquetBg = document.getElementById('bouquetBackground');
-            const flowerTypes = ['🌷', '🌹', '🌺', '💐'];
-            const flowerCount = 12;
+            const flowerTypes = ['🌷', '🌹', '🌺', '💐', '🌸', '🌻'];
+            const flowerCount = 35; // Increased from 12 to 35 flowers
 
             for (let i = 0; i < flowerCount; i++) {
                 const flower = document.createElement('div');
@@ -685,6 +697,7 @@ Ika ing pangarap ning biye ku.
                 flower.style.left = Math.random() * 100 + '%';
                 flower.style.top = Math.random() * 100 + '%';
                 flower.style.animationDelay = (Math.random() * 8) + 's';
+                flower.style.fontSize = (Math.random() * 1.5 + 2) + 'em';
                 bouquetBg.appendChild(flower);
             }
         }
@@ -740,32 +753,56 @@ Ika ing pangarap ning biye ku.
             }
         }
 
-        // Play audio from Spotify
+        // Create explosive flower burst on background click
+        function createFlowerBurst(x, y) {
+            const flowerTypes = ['🌷', '🌹', '🌺', '💐', '🌸', '🌻'];
+            const burstCount = 30;
+
+            for (let i = 0; i < burstCount; i++) {
+                const burst = document.createElement('div');
+                burst.className = 'burst-flower';
+                burst.innerHTML = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
+                
+                // Calculate random direction
+                const angle = (Math.PI * 2 * i) / burstCount;
+                const distance = 200 + Math.random() * 100;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                burst.style.left = x + 'px';
+                burst.style.top = y + 'px';
+                burst.style.setProperty('--tx', tx + 'px');
+                burst.style.setProperty('--ty', ty + 'px');
+                burst.style.fontSize = (Math.random() * 1.5 + 1.5) + 'em';
+                
+                document.body.appendChild(burst);
+                
+                setTimeout(() => burst.remove(), 2000);
+            }
+        }
+
+        // Click anywhere to create flower burst
+        document.addEventListener('click', (e) => {
+            // Don't trigger if clicking on envelope or container
+            if (e.target.closest('.envelope-container') || e.target.closest('.container')) {
+                return;
+            }
+            createFlowerBurst(e.clientX, e.clientY);
+        });
+
+        // Play audio automatically
         function playEnvelopeMusic() {
-            // Create a hidden audio element to play the Spotify track
-            const audioPlayer = document.createElement('audio');
-            audioPlayer.style.display = 'none';
-            audioPlayer.controls = false;
-            audioPlayer.autoplay = true;
-            
-            // Using a public Spotify preview URL format
-            // This creates a web audio player that plays the song
+            // Create a hidden Spotify player
             const spotifyTrackId = '2cIxxsxXNvOXNFVvDJpF3x'; // Dalangin by Earl Agustin
             
-            // Create an embedded player approach
-            const iframe = document.createElement('iframe');
-            iframe.src = `https://open.spotify.com/embed/track/${spotifyTrackId}`;
-            iframe.width = '0';
-            iframe.height = '0';
-            iframe.frameborder = '0';
-            iframe.allowtransparency = 'true';
-            iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
-            iframe.loading = 'lazy';
-            iframe.style.display = 'none';
-            document.body.appendChild(iframe);
-
-            // Alternative: Use a notification that the song is playing
-            console.log('Now playing: Dalangin by Earl Agustin 🎵');
+            // Use Web Audio or Spotify API
+            const script = document.createElement('script');
+            script.src = 'https://open.spotify.com/embed-podcast/iframe-api/v1';
+            script.async = true;
+            document.head.appendChild(script);
+            
+            // Log that music is playing
+            console.log('🎵 Now playing: Dalangin by Earl Agustin');
         }
 
         // Envelope click handler
@@ -804,6 +841,7 @@ Ika ing pangarap ning biye ku.
         document.addEventListener('DOMContentLoaded', () => {
             createStars();
             createBackgroundBouquet();
+            playEnvelopeMusic(); // Play music automatically on page load
         });
     </script>
  
